@@ -15,6 +15,10 @@ width_sidebar <- 375
 source("R/get_thresholds_data.R")
 thresholds_df <- get_thresholds_data()
 
+# Prepare countries list
+countries_ls <- unique(thresholds_df$country_of_residence)
+names(countries_ls) <- countries_ls
+
 # Build sidebar
 sidebar <- dashboardSidebar(
   width = width_sidebar,
@@ -34,7 +38,7 @@ sidebar <- dashboardSidebar(
     selectInput(
       "country", 
       "Country of residence: ", 
-      list(unique(thresholds_df$country_of_residence)), 
+      choices = countries_ls, 
       multiple = FALSE,
       selected = "Netherlands"
     ),
@@ -43,10 +47,10 @@ sidebar <- dashboardSidebar(
     checkboxGroupInput(
       "loan_types",
       "Loan types: ",
-      list(
+      choices = list(
         "Plan 1 (undergraduate)" = "plan_1",
         "Plan 2 (undergraduate)" = "plan_2",
-        "Postgraduate" = "postgraduate",
+        "Postgraduate" = "postgraduate"
       ), 
       selected = "plan_2"
     ),
@@ -58,10 +62,16 @@ sidebar <- dashboardSidebar(
 
 # Customise body
 body <- dashboardBody(
-  fluidRow(
-    box(
-      title = "Test output", width = 4, solidHeader = TRUE, status = "primary",
-      "Box content"
+  tabItems(
+    tabItem(tabName = "app_descrip", includeMarkdown("README.md")),
+    tabItem(
+      tabName = "calc",
+      fluidRow(
+        box(
+          title = "Test output", width = 12, solidHeader = TRUE, status = "primary",
+          uiOutput("test_table")
+        )
+      )
     )
   )
 )
@@ -74,5 +84,5 @@ dashboardPage(
   ),
   sidebar,
   body,
-  skin = "darkblue"
+  skin = "blue"
 )
