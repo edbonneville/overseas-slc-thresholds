@@ -11,14 +11,6 @@ library(strex)
 # Set sidebar width globally
 width_sidebar <- 375
 
-# Source thresholds data
-source("R/get_thresholds_data.R")
-thresholds_df <- get_thresholds_data()
-
-# Prepare countries list
-countries_ls <- unique(thresholds_df$country_of_residence)
-names(countries_ls) <- countries_ls
-
 # Build sidebar
 sidebar <- dashboardSidebar(
   width = width_sidebar,
