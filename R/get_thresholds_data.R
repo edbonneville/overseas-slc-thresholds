@@ -33,12 +33,12 @@ get_thresholds_data <- function() {
   # Label loan types and prepare data
   thresholds_df[, loan_type := factor(loan_type,
     levels = c(1, 2, 3),
-    labels = c("plan_1", "plan_2", "postgraduate")
+    labels = c("Plan 1", "Plan 2", "postgraduate")
   )]
   
   thresholds_df[, study_type := ifelse(
     loan_type == "postgraduate", 
-    "postrgraduate", 
+    "postgraduate", 
     "undergraduate"
   )]
 

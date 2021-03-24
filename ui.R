@@ -40,11 +40,11 @@ sidebar <- dashboardSidebar(
       "loan_types",
       "Loan types: ",
       choices = list(
-        "Plan 1 (undergraduate)" = "plan_1",
-        "Plan 2 (undergraduate)" = "plan_2",
+        "Plan 1 (undergraduate)" = "Plan 1",
+        "Plan 2 (undergraduate)" = "Plan 2",
         "Postgraduate" = "postgraduate"
       ), 
-      selected = "plan_2"
+      selected = "Plan 2"
     ),
     
     # Enter annual income
@@ -59,9 +59,28 @@ body <- dashboardBody(
     tabItem(
       tabName = "calc",
       fluidRow(
+        valueBoxOutput("gbp_yearly"),
+        valueBoxOutput("gbp_monthly"),
+        valueBoxOutput("local_monthly")
+      ),
+      fluidRow(
         box(
-          title = "Test output", width = 12, solidHeader = TRUE, status = "primary",
+          title = "Salary statement", width = 12, solidHeader = FALSE, status = "primary",
+          textOutput("pre_statement")
+        )
+      ),
+      fluidRow(
+        box(
+          title = "Explanations", width = 12, solidHeader = FALSE, status = "primary",
           uiOutput("test_table")
+        )
+      ),
+      fluidRow(
+        box(
+          title = "Show raw table", width = 12, solidHeader = FALSE, status = "primary",
+          collapsible = TRUE, collapsed = TRUE,
+          uiOutput("raw_table"),
+          footer = "This is the table shown on the gov.uk official website."
         )
       )
     )
