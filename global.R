@@ -2,6 +2,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinyWidgets)
+library(markdown)
 library(RCurl)
 library(rvest)
 library(data.table)

@@ -2,7 +2,7 @@
 
 > I took out a loan to study in the UK for university and now live/work overseas. How much will I have to pay back this year?
 
-The shiny app hosted [link here] answers the above question, as a means to a) plan your payments for the upcoming year, and b) fact-check correspondence between yourself and [Student Loans Company](https://www.gov.uk/government/organisations/student-loans-company) (SLC).
+The shiny app hosted [here](http://edbonneville.shinyapps.io/overseas-slc-thresholds) answers the above question, as a means to a) plan your payments for the upcoming year, and b) fact-check correspondence between yourself and [Student Loans Company](https://www.gov.uk/government/organisations/student-loans-company) (SLC).
 
 ## Details
 
