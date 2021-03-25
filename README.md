@@ -42,7 +42,7 @@ pacman::p_load(
 )
 
 # Run app
-shiny::runGitHub("gillespie_shiny", "edbonneville")
+shiny::runGitHub("overseas-slc-thresholds", "edbonneville")
 ```
 
 ## Is it worth making additional repayments?
