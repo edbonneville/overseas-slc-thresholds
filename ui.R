@@ -9,8 +9,8 @@ sidebar <- dashboardSidebar(
   sidebarMenu(
     id = "nav",
     menuItem("Information", tabName = "app_descrip", icon = icon("info")),
-    menuItem("Calculator", tabName = "calc", icon = icon("arrow-circle-right")),
-    menuItem("Source code", href = "https://github.com/edbonneville/overseas-slc-thresholds", icon = icon("github"))
+    menuItem("Calculator", tabName = "calc", icon = icon("calculator"), selected = TRUE),
+    menuItem("Source code", href = "https://github.com/edbonneville/overseas-slc-thresholds", icon = icon("code-branch"))
   ),
   
   # Start calculator
@@ -39,7 +39,7 @@ sidebar <- dashboardSidebar(
     ),
     
     # Enter annual income
-    numericInput('income', "Annual income (local currency)", value = 35000, min = 0)
+    numericInput('income', "Annual gross income (local currency)", value = 35000, min = 0)
   )
 )
 
