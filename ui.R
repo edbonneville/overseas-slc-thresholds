@@ -5,7 +5,7 @@ width_sidebar <- 400
 sidebar <- dashboardSidebar(
   width = width_sidebar,
   
-  # Read description of app or run directly - icons from https://fontawesome.com
+  # Menu selections
   sidebarMenu(
     id = "nav",
     menuItem("Information", tabName = "app_descrip", icon = icon("info")),
@@ -13,7 +13,7 @@ sidebar <- dashboardSidebar(
     menuItem("Source code", href = "https://github.com/edbonneville/overseas-slc-thresholds", icon = icon("code-branch"))
   ),
   
-  # Start calculator
+  # Start calculator if selected
   conditionalPanel(
     condition = 'input.nav == "calc"',
     
@@ -39,7 +39,7 @@ sidebar <- dashboardSidebar(
     ),
     
     # Enter annual income
-    numericInput('income', "Annual gross income (local currency)", value = 35000, min = 0)
+    uiOutput("income_ui")
   )
 )
 
@@ -49,27 +49,41 @@ body <- dashboardBody(
     tabItem(tabName = "app_descrip", includeMarkdown("README.md")),
     tabItem(
       tabName = "calc",
+      # Value boxes on first row
       fluidRow(
         valueBoxOutput("gbp_yearly"),
         valueBoxOutput("gbp_monthly"),
         valueBoxOutput("local_monthly")
       ),
+      # Salary statement on second
       fluidRow(
         box(
-          title = "Salary statement", width = 12, solidHeader = FALSE, status = "primary",
+          title = "Salary statement", 
+          width = 12, 
+          solidHeader = FALSE,
+          status = "primary",
           textOutput("pre_statement")
         )
       ),
+      # Explanations table on third
       fluidRow(
         box(
-          title = "Explanations", width = 12, solidHeader = FALSE, status = "primary",
+          title = "Explanations", 
+          width = 12, 
+          solidHeader = FALSE, 
+          status = "primary",
           uiOutput("explanations_table")
         )
       ),
+      # Add raw table at bottom, collapsible
       fluidRow(
         box(
-          title = "Show raw table", width = 12, solidHeader = FALSE, status = "primary",
-          collapsible = TRUE, collapsed = TRUE,
+          title = "Show raw table", 
+          width = 12, 
+          solidHeader = FALSE, 
+          status = "primary",
+          collapsible = TRUE, 
+          collapsed = TRUE,
           uiOutput("raw_table"),
           footer = "This is the table shown on the gov.uk official website."
         )

@@ -15,6 +15,8 @@ source("R/get_thresholds_data.R")
 # Load
 thresholds_df <- get_thresholds_data()
 
-# Prepare countries list
-countries_ls <- unique(thresholds_df$country_of_residence)
-names(countries_ls) <- countries_ls
+# Prepare countries and currencies
+unique_df <- unique(thresholds_df[, c("country_of_residence", "currency")])
+countries_ls <- unique_df[["country_of_residence"]]
+currencies_ls <- unique_df[["currency"]]
+names(countries_ls) <- names(currencies_ls) <- countries_ls

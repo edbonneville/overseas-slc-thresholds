@@ -9,7 +9,7 @@ function(input, output, session) {
       need(input$income >= 0, "Income should be a positive number!")
     )
     
-    # Calculate repayments
+    # Calculate repayments and get statements
     repayments_df <- calculate_repayments(
       country = input$country,
       loan_plans = input$loan_types,
@@ -25,15 +25,27 @@ function(input, output, session) {
     list("repayments_df" = repayments_df, "statements" = statements)
   }) 
   
+  # This allows currency to render dynamically in sidebar
+  output$income_ui <- renderUI({
+    numericInput(
+      'income', 
+      paste0("Annual gross income (", currencies_ls[input$country], ")"),
+      value = 35000, 
+      min = 0
+    )
+  })
+  
+  # Statement on annual salary conversion
   output$pre_statement <- renderText({
     repayment_data()$statements$pre_statement
   })
   
+  # Explains the calculations for each loan
   output$explanations_table <- renderTable({
-    df <- repayment_data()$statements$explanations
-    df
+    repayment_data()$statements$explanations
   })
   
+  # Output raw thresholds on gov.uk site
   output$raw_table <- renderTable({
     df_temp <- thresholds_df[country_of_residence == input$country, c(
       "loan_type",
@@ -61,7 +73,7 @@ function(input, output, session) {
     df_temp
   })
   
-  #... Add nice value buttons/boxes, 'infoboxes'
+  # Value box for yearly GBP owed
   output$gbp_yearly <- renderValueBox({
     df <- repayment_data()$repayments_df[amount_owed_gbp >= 0]
     valueBox(
@@ -72,6 +84,7 @@ function(input, output, session) {
     )
   })
   
+  # Value box for monthly GBP owed
   output$gbp_monthly <- renderValueBox({
     df <- repayment_data()$repayments_df[amount_owed_gbp >= 0]
     valueBox(
@@ -82,6 +95,7 @@ function(input, output, session) {
     )
   })
   
+  # Value box for local amount owed
   output$local_monthly <- renderValueBox({
     df <- repayment_data()$repayments_df
     valueBox(
