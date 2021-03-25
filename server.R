@@ -1,12 +1,3 @@
-# Source thresholds data
-source("R/calculate_repayments.R")
-source("R/get_thresholds_data.R")
-thresholds_df <- get_thresholds_data()
-
-# Prepare countries list
-countries_ls <- unique(thresholds_df$country_of_residence)
-names(countries_ls) <- countries_ls
-
 # Start server function
 function(input, output, session) {
   
@@ -38,7 +29,7 @@ function(input, output, session) {
     repayment_data()$statements$pre_statement
   })
   
-  output$test_table <- renderTable({
+  output$explanations_table <- renderTable({
     df <- repayment_data()$statements$explanations
     print(df)
   })
@@ -88,10 +79,10 @@ function(input, output, session) {
   })
   
   output$local_monthly <- renderValueBox({
-    df <- repayment_data()$repayments_df[amount_owed_local >= 0]
+    df <- repayment_data()$repayments_df
     valueBox(
-      paste0(round(sum(df$amount_owed_local) / 12, 2)), 
-      "Monthly repayment (local)",
+      paste0(round(sum(df[amount_owed_local >= 0]$amount_owed_local) / 12, 2)), 
+      paste0("Monthly repayment (", df$currency[1],")"),
       icon = icon("money-bill-alt"),
       color = "green"
     )

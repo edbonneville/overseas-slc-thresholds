@@ -1,15 +1,5 @@
-# Load necessary packages
-library(shiny)
-library(shinydashboard)
-library(shinyWidgets)
-library(RCurl)
-library(rvest)
-library(data.table)
-library(janitor)
-library(strex)
-
 # Set sidebar width globally
-width_sidebar <- 375
+width_sidebar <- 400
 
 # Build sidebar
 sidebar <- dashboardSidebar(
@@ -72,7 +62,7 @@ body <- dashboardBody(
       fluidRow(
         box(
           title = "Explanations", width = 12, solidHeader = FALSE, status = "primary",
-          uiOutput("test_table")
+          uiOutput("explanations_table")
         )
       ),
       fluidRow(
