@@ -9,7 +9,8 @@ sidebar <- dashboardSidebar(
   sidebarMenu(
     id = "nav",
     menuItem("Information", tabName = "app_descrip", icon = icon("info")),
-    menuItem("Calculator", tabName = "calc", icon = icon("arrow-circle-right"))
+    menuItem("Calculator", tabName = "calc", icon = icon("arrow-circle-right")),
+    menuItem("Source code", href = "https://github.com/edbonneville/overseas-slc-thresholds", icon = icon("github"))
   ),
   
   # Start calculator

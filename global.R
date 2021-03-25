@@ -1,7 +1,6 @@
 # Load necessary packages
 library(shiny)
 library(shinydashboard)
-library(shinyWidgets)
 library(markdown)
 library(RCurl)
 library(rvest)

@@ -31,7 +31,7 @@ function(input, output, session) {
   
   output$explanations_table <- renderTable({
     df <- repayment_data()$statements$explanations
-    print(df)
+    df
   })
   
   output$raw_table <- renderTable({
@@ -44,6 +44,9 @@ function(input, output, session) {
       "fixed_monthly_repayment_gbp"
     )]
     
+    # Make sure exchange rate digits are not rounded
+    df_temp[, exchange_rate := format(exchange_rate, digits = 6)]
+    
     data.table::setnames(
       df_temp, new = c(
         "Type", 
@@ -54,7 +57,8 @@ function(input, output, session) {
         "Fixed monthly repayment (GBP)"
       )
     )
-    print(df_temp)
+    
+    df_temp
   })
   
   #... Add nice value buttons/boxes, 'infoboxes'
