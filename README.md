@@ -24,6 +24,27 @@ Given this information, the app will:
 - Applying repayment rules based on the selected loan types.
 - Calculate and report total amount to repay, as well as provide explanations for it.
 
+## Running the app locally
+
+``` r
+# Check for and install (if necessary) packages
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+
+pacman::p_load(
+  "shiny",
+  "shinydashboard",
+  "markdown",
+  "RCurl",
+  "rvest",
+  "data.table",
+  "janitor",
+  "strex"
+)
+
+# Run app
+shiny::runGitHub("gillespie_shiny", "edbonneville")
+```
+
 ## Is it worth making additional repayments?
 
 There are already well developed calculators aimed at answering this, see for example [here](https://www.student-loan-calculator.co.uk/) and [here](https://yourslrc.co.uk/). You may take your income (converted to GBP by the current app), and supply it to one of these calculators along with your current debt balance to get your own assessment.
