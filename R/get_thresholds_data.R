@@ -7,8 +7,8 @@ get_thresholds_data <- function() {
   )
   
   # Check that the websites still exist
-  check_sites_exist <- RCurl::url.exists(urls)
-  if (!any(check_sites_exist)) stop("One or more of the websites no longer exist.")
+  #check_sites_exist <- RCurl::url.exists(urls)
+  #if (!any(check_sites_exist)) stop("One or more of the websites no longer exist.")
   
   # If they exist, check they all contain a html table with the thresholds
   tables_ls <- lapply(urls, function(url) rvest::html_table(rvest::read_html(url)))
