@@ -64,4 +64,3 @@ make_repayment_statements <- function(country_df,
   explanations_df <- do.call(rbind, ls_statements)
   return(list("pre_statement" = pre_statement, "explanations" = explanations_df))
 }
-

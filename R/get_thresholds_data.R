@@ -1,9 +1,9 @@
 get_thresholds_data <- function() {
   
   urls <- list(
-    "plan_1" = "https://www.gov.uk/government/publications/overseas-earnings-thresholds-for-plan-1-student-loans/overseas-earnings-thresholds-for-plan-1-student-loans-2020-21",
-    "plan_2" = "https://www.gov.uk/government/publications/overseas-earnings-thresholds-for-plan-2-student-loans/overseas-earnings-thresholds-for-plan-2-student-loans-2020-21",
-    "postgraduate" = "https://www.gov.uk/government/publications/overseas-earnings-thresholds-for-postgraduate-student-loans/overseas-earnings-thresholds-for-postgraduate-student-loans-2020-21"
+    "plan_1" = "https://www.gov.uk/government/publications/overseas-earnings-thresholds-for-plan-1-student-loans/overseas-earnings-thresholds-for-plan-1-student-loans-2023-24",
+    "plan_2" = "https://www.gov.uk/government/publications/overseas-earnings-thresholds-for-plan-2-student-loans/overseas-earnings-thresholds-for-plan-2-student-loans-2023-24",
+    "postgraduate" = "https://www.gov.uk/government/publications/overseas-earnings-thresholds-for-postgraduate-student-loans/overseas-earnings-thresholds-for-postgraduate-student-loans-2023-24"
   )
   
   # Check that the websites still exist
@@ -12,7 +12,7 @@ get_thresholds_data <- function() {
   
   # If they exist, check they all contain a html table with the thresholds
   tables_ls <- lapply(urls, function(url) rvest::html_table(rvest::read_html(url)))
-  tables_check <- vapply(tables_ls, length, FUN.VALUE = integer(1))
+  tables_check <- vapply(tables_ls, length, FUN.VALUE = integer(1L))
   
   if (any(tables_check == 0)) {
     locs <- paste(names(tables_ls[which(tables_check == 0)]), collapse = ", ")
@@ -21,10 +21,10 @@ get_thresholds_data <- function() {
   } 
   
   # Read-in
-  plan_1 <- data.table::data.table(tables_ls[["plan_1"]][[1]])
-  plan_2 <- data.table::data.table(tables_ls[["plan_2"]][[1]])
+  plan_1 <- data.table::data.table(tables_ls$plan_1[[1]])
+  plan_2 <- data.table::data.table(tables_ls$plan_2[[1]])
   data.table::setnames(x = plan_2, old = "Lower earnings threshold (GBP)", new = "Earnings threshold (GBP)")
-  postgrad <- data.table::data.table(tables_ls[["postgraduate"]][[1]])
+  postgrad <- data.table::data.table(tables_ls$postgraduate[[1]])
   
   # Bind together
   thresholds_df <- rbind(plan_1, plan_2, postgrad, fill = TRUE, idcol = "loan_type")
