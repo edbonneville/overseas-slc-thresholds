@@ -47,4 +47,4 @@ shiny::runGitHub("overseas-slc-thresholds", "edbonneville")
 
 ## Is it worth making additional repayments?
 
-There are already well developed calculators aimed at answering this, see for example [here](https://www.student-loan-calculator.co.uk/) and [here](https://yourslrc.co.uk/). You may take your income (converted to GBP by the current app), and supply it to one of these calculators along with your current debt balance to get your own assessment.
+There are already well developed calculators aimed at answering this, see for example [here](https://www.student-loan-calculator.co.uk/) and [here](https://www.yourstudentloancalculator.co.uk/). You may take your income (converted to GBP by the current app), and supply it to one of these calculators along with your current debt balance to get your own assessment.
