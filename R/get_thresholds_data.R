@@ -30,6 +30,9 @@ get_thresholds_data <- function() {
   thresholds_df <- rbind(plan_1, plan_2, postgrad, fill = TRUE, idcol = "loan_type")
   thresholds_df <- janitor::clean_names(thresholds_df)
   
+  # Change in name online: 
+  data.table::setnames(x = thresholds_df, old = "country_territory", new = "country_of_residence")
+  
   # Label loan types and prepare data
   thresholds_df[, loan_type := factor(loan_type,
     levels = c(1, 2, 3),
